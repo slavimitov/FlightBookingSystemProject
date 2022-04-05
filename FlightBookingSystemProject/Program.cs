@@ -1,4 +1,5 @@
 using FlightBookingSystemProject.Data;
+using FlightBookingSystemProject.Infastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,6 +23,7 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+app.PrepareDatabase();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
