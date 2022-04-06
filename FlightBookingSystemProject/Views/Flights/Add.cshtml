@@ -1,0 +1,67 @@
+﻿@model FlightFormModel
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+
+<link rel="stylesheet" href="~/css/add.css" asp-append-version="true" />
+<!DOCTYPE html>
+<html lang="en">
+
+<form class="border border-light p-5" asp-action="Add" asp-area="" asp-controller="Flights">
+    <body>
+        <!------ Include the above in your HEAD tag ---------->
+        <div class="bg-image p-5 text-center shadow-1-strong rounded mb-5 text-white"
+             style="background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/003.webp');background-repeat: no-repeat; height: 100vh; background-size:cover; margin: 0; padding: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;">
+            <div class="container add">
+                <div class="row">
+                    <div class="col-md-3 add-left">
+                        <img src="https://iconape.com/wp-content/files/be/367428/svg/airplane-logo-icon-png-svg.png" />
+                        <h3>Add</h3>
+                        <p>Create your flight!</p>
+                        <button class="btn btn-info my-4 pill" type="submit">Add</button>
+                    </div>
+                    <div class="col-md-9 add-right">
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active">
+                                <h3 class="add-heading">Create Form</h3>
+                                <div class="row add-form">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label style="color:gray" asp-for="Origin"></label>
+                                            <input asp-for="Origin" class="form-control" placeholder="NQW, BAR, etc...">
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="color:gray" asp-for="Destination"></label>
+                                            <input asp-for="Destination" class="form-control" placeholder="NQW, BAR, etc...">
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="color:gray" asp-for="DepartureTime"></label>
+                                            <input asp-for="DepartureTime" class="form-control" type="date">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label style="color:gray" asp-for="TakeOffTime"></label>
+                                            <input asp-for="TakeOffTime" class="form-control" type="date">
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="color:gray" asp-for="Price"></label>
+                                            <input asp-for="Price" class="form-control" type="number" placeholder="137">
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="color:gray" asp-for="DestinationImageUrl"></label>
+                                            <input asp-for="DestinationImageUrl" class="form-control" placeholder="url">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</form>
+</html>
