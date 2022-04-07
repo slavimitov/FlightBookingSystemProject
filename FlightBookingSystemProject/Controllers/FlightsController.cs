@@ -51,5 +51,24 @@ namespace FlightBookingSystemProject.Controllers
 
             return Redirect("/");
         }
+
+        public IActionResult All()
+        {
+            var query = data.Flights.ToList();
+
+            var flights = query
+                .Select(x => new AllFlightsViewModel
+                {
+                    Origin = x.Origin,
+                    Destination = x.Destination,
+                    DepartureDate = x.DepartureTime.ToString(),
+                    ReturnDate = x.TakeOffTime.ToString(),
+                    Price = x.Price,
+                    DestinationImageUrl = x.DestinationImageUrl,
+                    FlightId = x.Id
+                }).ToList();
+
+            return View(flights);
+        }
     }
 }
