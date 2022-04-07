@@ -1,0 +1,90 @@
+﻿@model List<SelectListItem>
+<link rel="stylesheet" href="~/css/book.css" asp-append-version="true" />
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js"></script>
+</head>
+<body>
+
+        <div class="container">
+        <h2>Modal Example</h2>
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        @using (Html.BeginForm("Book", "Seats", FormMethod.Post))
+                        {
+                            <div class="plane">
+                                <div class="cockpit">
+                                    <h1>Choose your seats</h1>
+                                </div>
+                                <div class="exit">
+                                </div>
+                                <form method="post" asp-controller="Seats" asp-action="Book">
+                                    <ol class="cabin fuselage">
+                                        @{
+                                            int k = 0;
+                                            @for (var i = 1; i <= 10; i++)
+                                            {
+                                                <li class="row row--@i" type="A">
+                                                    <ol class="seats">
+
+                                                        @for (var j = 0; j < 6; j++)
+                                                        {
+                                                            <li class="seat">
+                                                                <input type="checkbox" name="@Model[j+k].Value" id="@Model[j+k].Value" value="@Model[j+k].Value">
+                                                                <label for="@Model[j+k].Value">@Model[j+k].Text</label>
+                                                            </li>
+
+                                                        }
+                                                        @{
+                                                            k += 6;
+                                                        }
+
+                                                    </ol>
+                                                </li>
+
+                                            }
+                                        }
+                                    </ol>
+                                </form>
+                                <div class="exit exit--back fuselage">
+                                </div>
+                                <button class="btn btn-info my-4 pill" type="submit">Submit</button>
+                            </div>
+                        }
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+
+

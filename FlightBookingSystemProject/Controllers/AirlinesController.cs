@@ -5,7 +5,7 @@ using FlightBookingSystemProject.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Project.Controllers
+namespace FlightBookingSystemProject.Controllers
 {
     public class AirlinesController : Controller
     {
