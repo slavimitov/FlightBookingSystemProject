@@ -46,7 +46,7 @@
                                                         @for (var j = 0; j < 6; j++)
                                                         {
                                                             <li class="seat">
-                                                                <input type="checkbox" name="@Model[j+k].Value" id="@Model[j+k].Value" value="@Model[j+k].Value">
+                                                                <input type="checkbox" name="@Model[j+k].Value" id="@Model[j+k].Value" value="@Model[j+k].Value" @(Model[j+k].Disabled == true ? new { @disabled = "disabled" } : String.Empty)>
                                                                 <label for="@Model[j+k].Value">@Model[j+k].Text</label>
                                                             </li>
 
