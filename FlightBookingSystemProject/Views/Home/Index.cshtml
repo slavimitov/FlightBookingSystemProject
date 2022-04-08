@@ -1,75 +1,127 @@
-﻿<link rel="stylesheet" href="~/css/search.css" asp-append-version="true" />
+﻿<link rel="stylesheet" href="~/css/card.css" asp-append-version="true" />
+
+<link rel="stylesheet" href="~/css/carousel.css" asp-append-version="true" />
+<link href="//stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="stylesheet">
+<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
+<script src="	https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+@model List<AllFlightsViewModel>
+
+
 <div class="container-full">
-      <div class="row">
+    <div class="row">
         <div class="col-lg-12 text-center v-center">
-          
-          <h1>Hello To Booking System</h1>
-          <p class="lead">Your best choice for booking flights</p>
-          
-          <br>
-          
-            <div class="wrapper" style="background-color: rgba(255,255,255, .8); ">
-    <form action="#">
-        <div class="form-group d-sm-flex margin">
-            <div class="d-flex align-items-center flex-fill me-sm-1 my-sm-0 my-4 border-bottom position-relative"> <input type="text" required placeholder="From" class="form-control">
-                <div class="label" id="from"></div> <span class="fas fa-dot-circle text-muted"></span>
-            </div>
-            <div class="d-flex align-items-center flex-fill ms-sm-1 my-sm-0 my-4 border-bottom position-relative"> <input type="text" required placeholder="To" class="form-control">
-                <div class="label" id="to"></div> <span class="fas fa-map-marker text-muted"></span>
-            </div>
+
+            <h1>Hello To Booking System</h1>
+            <p class="lead">Your best choice for booking flights</p>
+            <br>
+            <br>
+            <br>
+            <br>
+            <p class="lead">Click "Search" link below to find wanted flight!</p>
+            @Html.ActionLink("Search", "Search", "Flights")
+
         </div>
-        <div class="form-group d-sm-flex margin">
-            <div class="d-flex align-items-center flex-fill me-sm1 my-sm-0 border-bottom position-relative"> <input type="date" required placeholder="Depart Date" class="form-control">
-                <div class="label" id="depart"></div>
-            </div>
-            <div class="d-flex align-items-center flex-fill ms-sm-1 my-sm-0 my-4 border-bottom position-relative"> <input type="date" required placeholder="Return Date" class="form-control">
-                <div class="label" id="return"></div>
-            </div>
-        </div>
-        <div class="form-group border-bottom d-flex align-items-center position-relative"> <input type="text" required placeholder="Traveller(s)" class="form-control">
-            <div class="label" id="psngr"></div> <span class="fas fa-users text-muted"></span>
-        </div>
-        <div class="form-group my-3">
-            <div class="btn btn-primary rounded-0 d-flex justify-content-center text-center p-3">Search Flights </div>
-        </div>
-    </form>
-</div>
-        </div>
-        
-      </div> <!-- /row -->
-    	 
-  	<br><br><br><br><br>
+
+    </div> <!-- /row -->
+
+    <br><br><br><br><br>
 
 </div> <!-- /container full -->
+<section class="pt-2 pb-2">
+    <div class="container">
+        @if (Model.Count <= 1)
+        {
+            <div class="col-lg-12 text-center v-center">
+            <p style="color:#2D7491;" class="lead">We don't have enough flights to be visualized here</p>
+            <p style="color:#2D7491;" class="lead">Become Airline and add some flights :)</p>
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-6">
+                    <h3 class="mb-3">Our Flights </h3>
+                </div>
+                <div class="col-6 text-right">
+                    <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+                        <i class="fa fa-arrow-left"></i>
+                    </a>
+                    <a class="btn btn-primary mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
+                        <i class="fa fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="col-12">
+                    <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
 
-<div class="container">
-  
-  	<hr>
-  
-  	<div class="row">
-        <div class="col-md-4">
-          <div class="panel panel-default">
-            <div class="panel-heading"><h3>Hello.</h3></div>
-            <div class="panel-body">First Fligth
+                        <div class="carousel-inner">
+                            @for (var i = 0; i < Model.Count; i += 2)
+                            {
+                                <div class="carousel-item @(i == 0 ? "active" : string.Empty)">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-6 col-xs-12 align-items-center">
+                                            <article class="card card-big mb15">
+                                                <div class="card__img-wrap">
+                                                    <img src="@Model[i].DestinationImageUrl">
+                                                    <h4 class="title title-overlay-center">Explore @Model[i].Destination</h4>
+                                                </div>
+                                                <div class="card__info">
+                                                    <div class="title-left-wrap"> <h5>@Model[i].Origin</h5><small>@Model[i].Origin</small></div>
+                                                    <span class="icon-center-wrap"><i class="material-icons rotate90"></i></span>
+                                                    <div class="title-right-wrap"> <h5>@Model[i].Destination</h5> <small>@Model[i].Destination</small></div>
+                                                </div> <!--  card__info //  -->
+                                        <div class="card__pricelist">
+                                                    <div class="cost">
+                                                        <div class="logo-wrap"><img src="https://asfartrip.com/public/assets/images/airline_logo/J9.png"></div>
+                                                        <div class="icon-wrap"> <i class="material-icons"></i>  <small>@Model[i].ReturnDate</small> </div>
+                                                        <div class="price-wrap">
+                                                            <var class="price"><span class="currency">EUR</span>@Model[i].Price</var>
+                                                        </div>
+
+                                                    </div><!--  cost //  -->
+                                        </div> <!-- card__pricelist // -->
+                                    </article> <!-- card // -->
+                                </div>
+
+                                        <!-- col // -->
+
+
+                                <div class="col-sm-6 col-md-6 col-xs-12">
+                                            <article class="card card-big mb15">
+                                                <div class="card__img-wrap">
+                                                    <img src="@Model[i+1].DestinationImageUrl">
+                                                    <h4 class="title title-overlay-center">Explore @Model[i+1].Destination</h4>
+                                                </div>
+                                                <div class="card__info">
+                                                    <div class="title-left-wrap"> <h5>@Model[i+1].Origin</h5> <small>@Model[i+1].Origin  </small></div>
+                                                    <span class="icon-center-wrap"><i class="material-icons rotate90"></i></span>
+                                                    <div class="title-right-wrap"> <h5>@Model[i+1].Destination</h5> <small>@Model[i+1].Destination </small></div>
+                                                </div> <!--  card__info //  -->
+                                        <div class="card__pricelist">
+                                                    <div class="cost">
+                                                        <div class="logo-wrap"><img src="https://asfartrip.com/public/assets/images/airline_logo/J9.png"></div>
+                                                        <div class="icon-wrap"> <i class="material-icons"></i>  <small>@Model[i+1].ReturnDate</small> </div>
+                                                        <div class="price-wrap">
+                                                            <var class="price"><span class="currency">EUR</span>@Model[i+1].Price</var>
+                                                        </div>
+
+                                                    </div><!--  cost //  -->
+                                        </div> <!-- card__pricelist // -->
+                                    </article> <!-- card // -->
+                                </div>
+
+                                        <!-- col // -->
+                            </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      	<div class="col-md-4">
-        	<div class="panel panel-default">
-            <div class="panel-heading"><h3>Hello.</h3></div>
-            <div class="panel-body">Second Fligth
-            </div>
-          </div>
-        </div>
-      	<div class="col-md-4">
-        	<div class="panel panel-default">
-            <div class="panel-heading"><h3>Hello.</h3></div>
-            <div class="panel-body">Third Fligth
-            </div>
-          </div>
-        </div>
+        }
+
+
     </div>
-  
-	
-</div>
-
+</section>

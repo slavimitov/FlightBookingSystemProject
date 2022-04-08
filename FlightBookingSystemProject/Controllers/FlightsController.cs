@@ -26,8 +26,8 @@ namespace FlightBookingSystemProject.Controllers
             {
                 Origin = flight.Origin,
                 Destination = flight.Destination,
-                TakeOffTime = DateTime.Parse(flight.TakeOffTime),
-                DepartureTime = DateTime.Parse(flight.DepartureTime),
+                ReturnDate = DateTime.Parse(flight.ReturnDate),
+                DepartureDate = DateTime.Parse(flight.DepartureDate),
                 Price = flight.Price,
                 AirlineId = 1,
                 DestinationImageUrl = flight.DestinationImageUrl
@@ -61,8 +61,8 @@ namespace FlightBookingSystemProject.Controllers
                 {
                     Origin = x.Origin,
                     Destination = x.Destination,
-                    DepartureDate = x.DepartureTime.ToString(),
-                    ReturnDate = x.TakeOffTime.ToString(),
+                    DepartureDate = x.DepartureDate.ToString(),
+                    ReturnDate = x.ReturnDate.ToString(),
                     Price = x.Price,
                     DestinationImageUrl = x.DestinationImageUrl,
                     FlightId = x.Id
