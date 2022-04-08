@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace FlightBookingSystemProject.Data
@@ -9,10 +10,27 @@ namespace FlightBookingSystemProject.Data
         public DbSet<Seat> Seats { get; set; }
         public DbSet<Airport> Airports { get; set; }
         public DbSet<Airline> Airlines { get; set; }
-
+        public DbSet<Ticket> Tickets { get; set; }
         public FlightBookingDbContext(DbContextOptions<FlightBookingDbContext> options)
             : base(options)
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder
+               .Entity<Ticket>()
+               .HasOne(s => s.Seat)
+               .WithOne()
+               .HasForeignKey<Ticket>(s => s.SeatId)
+               .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+              .Entity<IdentityUserLogin<string>>()
+              .HasNoKey();
+
+
+            base.OnModelCreating(builder);
         }
     }
 }
