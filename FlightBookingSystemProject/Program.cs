@@ -18,13 +18,14 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
 })
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<FlightBookingDbContext>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-app.PrepareDatabase();
 // Configure the HTTP request pipeline.
+app.PrepareDatabase();
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
@@ -36,7 +37,7 @@ else
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -45,8 +46,15 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
+    name: "Area",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+//((IApplicationBuilder)app).ApplicationServices.GetService<AirplaneBookingDbContext>().Database.Migrate();
+
+
+
 
 app.Run();

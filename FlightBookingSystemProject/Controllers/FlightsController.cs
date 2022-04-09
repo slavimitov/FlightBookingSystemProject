@@ -1,4 +1,5 @@
 ﻿using FlightBookingSystemProject.Data;
+using FlightBookingSystemProject.Infastructure;
 using FlightBookingSystemProject.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,7 +30,7 @@ namespace FlightBookingSystemProject.Controllers
                 ReturnDate = DateTime.Parse(flight.ReturnDate),
                 DepartureDate = DateTime.Parse(flight.DepartureDate),
                 Price = flight.Price,
-                AirlineId = 1,
+                AirlineId = data.Airlines.FirstOrDefault(a => a.UserId == this.User.Id()).Id,
                 DestinationImageUrl = flight.DestinationImageUrl
 
             };

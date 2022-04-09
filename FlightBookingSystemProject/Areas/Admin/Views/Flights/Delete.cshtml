@@ -1,0 +1,10 @@
+﻿<div class="row">
+    <div class="col-md-6">
+        <form asp-area="Admin" asp-controller="Flights" asp-action="Delete" method="post">
+            <h4 class="text-danger">Are you sure you want to delete flight?</h4>
+            <hr />
+            <button type="submit" class="btn btn-danger">Delete flight</button>
+            <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("All", "Flights", new {Area = ""})'">Cancle</button>            
+        </form>      
+    </div>
+</div>
