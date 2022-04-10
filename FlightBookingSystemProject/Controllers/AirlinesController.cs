@@ -2,6 +2,7 @@
 using FlightBookingSystemProject.Data;
 using FlightBookingSystemProject.Infastructure;
 using FlightBookingSystemProject.Models;
+using FlightBookingSystemProject.Services.Airlines;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +10,12 @@ namespace FlightBookingSystemProject.Controllers
 {
     public class AirlinesController : Controller
     {
-        private readonly FlightBookingDbContext data;
+        private readonly IAirlineService airlines;
 
-        public AirlinesController(FlightBookingDbContext data)
-            => this.data = data;
+        public AirlinesController(IAirlineService airlines)
+        {
+            this.airlines = airlines;
+        }
 
         [Authorize]
         public IActionResult Become() => View();
@@ -22,12 +25,8 @@ namespace FlightBookingSystemProject.Controllers
         public IActionResult Become(BecomeAirlineFormModel airline)
         {
             var userId = this.User.Id();
-
-            var userIdAlreadyDealer = this.data
-                .Airlines
-                .Any(d => d.UserId == userId);
-
-            if (userIdAlreadyDealer)
+     
+            if (airlines.IsAirline(userId))
             {
                 return BadRequest();
             }
@@ -37,14 +36,7 @@ namespace FlightBookingSystemProject.Controllers
                 return View(airline);
             }
 
-            var airlineData = new Airline
-            {
-                Name = airline.Name,
-                UserId = userId
-            };
-
-            this.data.Airlines.Add(airlineData);
-            this.data.SaveChanges();
+            airlines.CreateAirline(airline.Name, userId); ;
 
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }

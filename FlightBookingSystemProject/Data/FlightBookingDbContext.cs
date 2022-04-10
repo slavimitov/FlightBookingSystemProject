@@ -19,13 +19,6 @@ namespace FlightBookingSystemProject.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder
-               .Entity<Ticket>()
-               .HasOne(s => s.Seat)
-               .WithOne()
-               .HasForeignKey<Ticket>(s => s.SeatId)
-               .OnDelete(DeleteBehavior.Restrict);
-
-            builder
               .Entity<IdentityUserLogin<string>>()
               .HasNoKey();
 

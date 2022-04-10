@@ -25,8 +25,8 @@ namespace FlightBookingSystemProject.Controllers
             var flights = query
                 .Select(x => new AllFlightsViewModel
                 {
-                    Origin = x.Origin,
-                    Destination = x.Destination,
+                    Origin = x.OriginIata,
+                    Destination = x.DestinationIata,
                     DepartureDate = x.DepartureDate.ToString(),
                     ReturnDate = x.ReturnDate.ToString(),
                     Price = x.Price,

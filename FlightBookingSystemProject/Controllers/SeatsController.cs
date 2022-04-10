@@ -1,24 +1,37 @@
 ﻿using FlightBookingSystemProject.Data;
 using FlightBookingSystemProject.Infastructure;
 using FlightBookingSystemProject.Models;
+using FlightBookingSystemProject.Services.Airlines;
+using FlightBookingSystemProject.Services.Seats;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace FlightBookingSystemProject.Controllers
 {
     public class SeatsController : Controller
     {
-        private readonly FlightBookingDbContext data;
-
-        public SeatsController(FlightBookingDbContext data)
+        private readonly ISeatService seats;
+        private readonly IAirlineService airlines;
+        public SeatsController(ISeatService seats, IAirlineService airlines)
         {
-            this.data = data;
+            this.seats = seats;
+            this.airlines = airlines;
         }
+
+        [Authorize]
         public IActionResult Book(int id)
         {
+            var userId = this.User.Id();
+            if (airlines.IsAirline(userId))
+            {
+                return RedirectToAction(nameof(FlightsController.All), "Flights");
+            }
+
             List<SelectListItem> items = new List<SelectListItem>();
-            var query = data.Seats.Where(s => s.FlightId == id).ToList();
+            var query = seats.GetSeats(id);
             foreach (var seat in query)
             {
                 items.Add(new SelectListItem
@@ -32,48 +45,46 @@ namespace FlightBookingSystemProject.Controllers
             return View(items);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Book(IFormCollection formCollection, int id)
         {
-            var seats = data.Seats.Where(s => s.FlightId == id).ToList();
-            var firstSeat = seats.First();
-            var lastSeat = seats.Last();
-            for (int i = firstSeat.Id; i <= lastSeat.Id; i++)
+            var userId = this.User.Id();
+            if (airlines.IsAirline(userId))
             {
-
-                if (!string.IsNullOrEmpty(formCollection[$"{i}"]))
-                {
-                    var seat = data.Seats.FirstOrDefault(s => s.FlightId == id && s.Id == int.Parse(formCollection[$"{i}"]));
-                    seat.IsBooked = true;
-                    data.Tickets.Add(new Ticket
-                    {
-                        UserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value,
-                        SeatId = seat.Id,
-                        FlightId = seat.FlightId
-
-                    });
-                    data.SaveChanges();
-                }
+                return RedirectToAction(nameof(FlightsController.All), "Flights");
             }
-            return Redirect("/");
+            seats.BookSeats(formCollection, id, userId);
+            return RedirectToAction(nameof(HomeController.Index), "Home"); ;
         }
 
+        [Authorize]
         public IActionResult MyBookedSeats()
         {
+            var userId = this.User.Id();
+            if (airlines.IsAirline(userId))
+            {
+                return RedirectToAction(nameof(FlightsController.All), "Flights");
+            }
 
-            var query = data.Tickets.Where(t => t.UserId == this.User.Id()).ToList();
+            var userEmail = this.User.FindFirst(ClaimTypes.Email).Value;
 
+            var query = seats.GetBookedSeats(userId, userEmail);
+
+            if (query.Count == 0)
+            {
+                throw new ArgumentException("Flight does not exist");
+            }
             var tickets = query
                 .Select(x => new TicketViewModel
                 {
-                    
-                    AirlineName = data.Airlines.FirstOrDefault(a => a.Id == data.Flights.FirstOrDefault(f => f.Id == x.FlightId).AirlineId).Name,
-                    Destination = data.Flights.FirstOrDefault(f => f.Id == x.FlightId).Destination,
-                    Origin = data.Flights.FirstOrDefault(f => f.Id == x.FlightId).Origin,
-                    DepartureDate = data.Flights.FirstOrDefault(f => f.Id == x.FlightId).DepartureDate.ToString(),
-                    Email = this.User.FindFirst(ClaimTypes.Email).Value,
+                    AirlineName = airlines.GetAirlineName(x.Flight.AirlineId),
+                    Destination = x.Flight.DestinationIata,
+                    Origin = x.Flight.OriginIata,
+                    DepartureDate = x.Flight.DepartureDate.ToString(),
+                    Email = userEmail,
                     FlightId = x.FlightId,
-                    SeatInitials = data.Seats.FirstOrDefault(s => s.Id == x.SeatId).Initials
+                    SeatInitials = x.Seat.Initials
                 }).ToList();
 
             return View(tickets);

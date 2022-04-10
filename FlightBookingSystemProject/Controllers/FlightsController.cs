@@ -1,20 +1,30 @@
 ﻿using FlightBookingSystemProject.Data;
 using FlightBookingSystemProject.Infastructure;
 using FlightBookingSystemProject.Models;
+using FlightBookingSystemProject.Services.Airlines;
+using FlightBookingSystemProject.Services.Flights;
+using FlightBookingSystemProject.Services.Seats;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlightBookingSystemProject.Controllers
 {
     public class FlightsController : Controller
     {
-        private readonly FlightBookingDbContext data;
+        private readonly IFlightService flights;
+        private readonly ISeatService seats;
+        private readonly IAirlineService airlines;
 
-        public FlightsController(FlightBookingDbContext data)
-        {
-            this.data = data;
+        public FlightsController(IFlightService flights, ISeatService seats, IAirlineService airlines)
+        {            
+            this.flights = flights;
+            this.seats = seats;
+            this.airlines = airlines;
         }
+        [Authorize]
         public IActionResult Add() => View();
 
+        [Authorize]
         [HttpPost]
         public IActionResult Add(FlightFormModel flight)
         {
@@ -23,89 +33,54 @@ namespace FlightBookingSystemProject.Controllers
                 return View(flight);
             }
 
-            var flightTemp = new Flight
-            {
-                Origin = flight.Origin,
-                Destination = flight.Destination,
-                ReturnDate = DateTime.Parse(flight.ReturnDate),
-                DepartureDate = DateTime.Parse(flight.DepartureDate),
-                Price = flight.Price,
-                AirlineId = data.Airlines.FirstOrDefault(a => a.UserId == this.User.Id()).Id,
-                DestinationImageUrl = flight.DestinationImageUrl
+            var userId = this.User.Id();
 
-            };
-            this.data.Flights.Add(flightTemp);
-            data.SaveChanges();
-            for (int i = 1; i <= 10; i++)
+            if (!airlines.IsAirline(userId))
             {
-                for (int j = 65; j <= 70; j++)
-                {
-                    this.data.Seats.Add(new Seat
-                    {
-                        Initials = i.ToString() + ((char)j).ToString(),
-                        IsBooked = false,
-                        FlightId = flightTemp.Id
-                    });
-                }
+                return BadRequest();
             }
-            data.SaveChanges();
+            
+            var flightId = this.flights.Add(
+                flight.Origin,
+                flight.Destination,
+                flight.ReturnDate,
+                flight.DepartureDate,
+                flight.Price,
+                flight.DestinationImageUrl,
+                userId);
 
-            return Redirect("/");
+            this.seats.CreateSeats(flightId);
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
         public IActionResult All()
         {
-            var query = data.Flights.ToList();
+            var query = this.flights.GetAll();
 
             var flights = query
                 .Select(x => new AllFlightsViewModel
                 {
-                    Origin = x.Origin,
-                    Destination = x.Destination,
+                    Origin = x.OriginIata,
+                    Destination = x.DestinationIata,
                     DepartureDate = x.DepartureDate.ToString(),
                     ReturnDate = x.ReturnDate.ToString(),
                     Price = x.Price,
                     DestinationImageUrl = x.DestinationImageUrl,
                     FlightId = x.Id
                 }).ToList();
-
             return View(flights);
         }
 
         public IActionResult Search(string origin, string destination, DateTime departureDate, DateTime returnDate, string travellers)
         {
-
-            List<Flight> query = data.Flights.ToList();
-
-
-            if (!string.IsNullOrEmpty(origin))
-            {
-                query = query.Where(f => f.Origin == origin).ToList();
-            }
-            if (!string.IsNullOrEmpty(destination))
-            {
-                query = query.Where(f => f.Destination == destination).ToList();
-            }
-            if (departureDate != new DateTime(0001, 01, 01))
-            {
-                query = query.Where(f => f.DepartureDate == departureDate).ToList();
-            }
-            if (returnDate != new DateTime(0001, 01, 01))
-            {
-                query = query.Where(f => f.ReturnDate == returnDate).ToList();
-            }
-            if (!string.IsNullOrEmpty(travellers))
-            {
-                query = query.Where(f => data.Seats.Where(s => f.Id == s.FlightId).Where(s => s.IsBooked == false).Count() > int.Parse(travellers)).ToList();
-            }
-
+            var query = flights.GetFiltered(origin, destination, departureDate, returnDate, travellers);
 
             var queryModel = new QueryModel();
             queryModel.Flights = query
                 .Select(x => new AllFlightsViewModel
                 {
-                    Origin = x.Origin,
-                    Destination = x.Destination,
+                    Origin = x.OriginIata,
+                    Destination = x.DestinationIata,
                     DepartureDate = x.DepartureDate.ToString(),
                     ReturnDate = x.ReturnDate.ToString(),
                     Price = x.Price,

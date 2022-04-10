@@ -1,5 +1,8 @@
 using FlightBookingSystemProject.Data;
 using FlightBookingSystemProject.Infastructure;
+using FlightBookingSystemProject.Services.Airlines;
+using FlightBookingSystemProject.Services.Flights;
+using FlightBookingSystemProject.Services.Seats;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +24,10 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<FlightBookingDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddTransient<IFlightService, FlightService>();
+builder.Services.AddTransient<IAirlineService, AirlineService>();
+builder.Services.AddTransient<ISeatService, SeatService>();
 
 var app = builder.Build();
 
