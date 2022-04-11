@@ -4,6 +4,7 @@ using FlightBookingSystemProject.Services.Airlines;
 using FlightBookingSystemProject.Services.Flights;
 using FlightBookingSystemProject.Services.Seats;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,7 +24,10 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 })
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<FlightBookingDbContext>();
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+});
 
 builder.Services.AddTransient<IFlightService, FlightService>();
 builder.Services.AddTransient<IAirlineService, AirlineService>();

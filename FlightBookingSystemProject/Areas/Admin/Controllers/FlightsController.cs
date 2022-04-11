@@ -1,28 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using FlightBookingSystemProject.Data;
+using FlightBookingSystemProject.Services.Flights;
 
 namespace FlightBookingSystemProject.Areas.Admin.Controllers
 {
     public class FlightsController : AdminController
     {
-        private readonly FlightBookingDbContext data;
-        public FlightsController(FlightBookingDbContext data)
+        private readonly IFlightService flights;
+        public FlightsController(IFlightService flights)
         {
-            this.data = data; 
+            this.flights = flights; 
         }
 
         public IActionResult Delete(int id)
         {
-          
             return this.View();
         }
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            var flight = data.Flights.FirstOrDefault(f => f.Id == id);
-            data.Flights.Remove(flight);
-            data.SaveChanges();
+            flights.DeleteFlight(id);
             return Redirect("/");
         }
     }

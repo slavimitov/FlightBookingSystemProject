@@ -18,8 +18,16 @@ namespace FlightBookingSystemProject.Controllers
         }
 
         [Authorize]
-        public IActionResult Become() => View();
+        public IActionResult Become()
+        {
+            var userId = this.User.Id();
 
+            if (airlines.IsAirline(userId) == true)
+            {
+                return BadRequest();
+            }
+            return View();
+        }
         [HttpPost]
         [Authorize]
         public IActionResult Become(BecomeAirlineFormModel airline)

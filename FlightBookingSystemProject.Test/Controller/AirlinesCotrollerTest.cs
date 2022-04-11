@@ -51,6 +51,10 @@ namespace FlightBookingSystemProject.Test.Controllers
             Mock<IAirlineService> airlineServiceMock = SetupIsAirlineFalse();
 
             var airlinesController = new AirlinesController(airlineServiceMock.Object);
+            ClaimsPrincipal user = MakeClaim();
+
+            airlinesController.ControllerContext = new ControllerContext();
+            airlinesController.ControllerContext.HttpContext = new DefaultHttpContext { User = user };
             //Act
             var result = airlinesController.Become();
             //Assert
@@ -59,7 +63,26 @@ namespace FlightBookingSystemProject.Test.Controllers
         }
 
         [Test]
-        public void BecomeShouldReturnBadReques()
+        public void BecomeWithoutParamsShouldReturnBadReques()
+        {
+            //Arrange
+
+            Mock<IAirlineService> airlineServiceMock = SetupIsAirlineTrue();
+
+            var airlinesController = new AirlinesController(airlineServiceMock.Object);
+            ClaimsPrincipal user = MakeClaim();
+
+            airlinesController.ControllerContext = new ControllerContext();
+            airlinesController.ControllerContext.HttpContext = new DefaultHttpContext { User = user };
+            //Act
+            var result = airlinesController.Become();
+            //Assert
+            Assert.NotNull(result);
+            Assert.IsInstanceOf<BadRequestResult>(result);
+        }
+
+        [Test]
+        public void BecomeWithParamsShouldReturnBadReques()
         {
             //Arrange
 

@@ -22,7 +22,16 @@ namespace FlightBookingSystemProject.Controllers
             this.airlines = airlines;
         }
         [Authorize]
-        public IActionResult Add() => View();
+        public IActionResult Add()
+        {
+            var userId = this.User.Id();
+
+            if (airlines.IsAirline(userId) == false)
+            {
+                return BadRequest();
+            }
+            return View();
+        }
 
         [Authorize]
         [HttpPost]

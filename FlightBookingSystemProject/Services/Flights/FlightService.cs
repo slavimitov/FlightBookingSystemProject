@@ -27,7 +27,13 @@ namespace FlightBookingSystemProject.Services.Flights
             this.data.SaveChanges();
             return flight.Id;
         }
-        
+
+        public void DeleteFlight(int flightId)
+        {
+            var flight = data.Flights.FirstOrDefault(f => f.Id == flightId);
+            data.Flights.Remove(flight);
+            data.SaveChanges();
+        }
 
         public List<Flight> GetAll()
         {

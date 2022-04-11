@@ -52,7 +52,11 @@ namespace FlightBookingSystemProject.Test.Controllers
         {
 
             //Arrange
-            var flightsController = new FlightsController(null, null, null);
+            var flightsController = new FlightsController(null, null, SetupIsAirlineTrue().Object);
+            ClaimsPrincipal user = MakeClaim();
+
+            flightsController.ControllerContext = new ControllerContext();
+            flightsController.ControllerContext.HttpContext = new DefaultHttpContext { User = user };
             //Act
             var result = flightsController.Add();
             //Assert
@@ -82,7 +86,26 @@ namespace FlightBookingSystemProject.Test.Controllers
         }
 
         [Test]
-        public void AddShouldReturnBadReques()
+        public void AddWithoutParamsShouldReturnBadReques()
+        {
+            //Arrange
+
+            Mock<IAirlineService> airlineServiceMock = SetupIsAirlineFalse();
+
+            var flightsController = new FlightsController(FlightServiceMock.Instance.Object, null, airlineServiceMock.Object);
+            ClaimsPrincipal user = MakeClaim();
+
+            flightsController.ControllerContext = new ControllerContext();
+            flightsController.ControllerContext.HttpContext = new DefaultHttpContext { User = user };
+            //Act
+            var result = flightsController.Add();
+            //Assert
+            Assert.NotNull(result);
+            Assert.IsInstanceOf<BadRequestResult>(result);
+        }
+
+        [Test]
+        public void AddWithParamsShouldReturnBadReques()
         {
             //Arrange
 
