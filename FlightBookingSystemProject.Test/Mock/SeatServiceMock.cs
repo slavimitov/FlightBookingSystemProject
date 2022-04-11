@@ -30,7 +30,7 @@ namespace FlightBookingSystemProject.Test.Mock
                    .Setup(x => x.CreateSeats(0));
 
                 seatServiceMock
-                    .Setup(x => x.GetBookedSeats("1", "da@com"))
+                    .Setup(x => x.GetBookedSeats("1"))
                     .Returns(Enumerable.Range(0, 10).Select(s => new Ticket
                     {
                         SeatId = 1,

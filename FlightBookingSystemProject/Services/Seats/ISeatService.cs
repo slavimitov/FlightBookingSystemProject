@@ -8,6 +8,6 @@ namespace FlightBookingSystemProject.Services.Seats
         void CreateSeats(int flightId);
         void BookSeats(IFormCollection formCollection, int flightId, string userId);
         List<Seat> GetSeats(int flightId);
-        List<Ticket> GetBookedSeats(string userId, string userEmail);
+        List<Ticket> GetBookedSeats(string userId);
     }
 }

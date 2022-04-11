@@ -63,7 +63,7 @@ namespace FlightBookingSystemProject.Services.Flights
             }
             if (!string.IsNullOrEmpty(travellers))
             {
-                query = query.Where(f => data.Seats.Where(s => f.Id == s.FlightId).Where(s => s.IsBooked == false).Count() > int.Parse(travellers)).ToList();
+                query = query.Where(f => data.Seats.Where(s => f.Id == s.FlightId).Where(s => s.IsBooked == false).Count() >= int.Parse(travellers)).ToList();
             }
 
             return query;

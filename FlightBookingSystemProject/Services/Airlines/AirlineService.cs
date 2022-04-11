@@ -23,9 +23,9 @@ namespace FlightBookingSystemProject.Services.Airlines
             this.data.SaveChanges();
         }
 
-        public string GetAirlineName(int flightId)
+        public string GetAirlineName(int airlineId)
         {
-            return data.Airlines.FirstOrDefault(a => a.Id == flightId).Name;
+            return data.Airlines.FirstOrDefault(a => a.Id == airlineId).Name;
         }
 
         public bool IsAirline(string userId)

@@ -1,5 +1,6 @@
 ﻿  @model IEnumerable<TicketViewModel>
 <link rel="stylesheet" href="~/css/ticket.css" asp-append-version="true" />
+<hr style="height:50pt; visibility:hidden;" />
 <div class="container py-5">
     <div class="row text-center text-white mb-5">
         <div class="col-lg-7 mx-auto">
@@ -67,7 +68,6 @@
             <span class="watermark">@item.AirlineName</span>
             <span class="name">PASSENGER NAME<br><span>@item.Email</span></span>
             <span class="flight">FLIGHT N&deg;<br><span>@item.FlightId</span></span>
-            <span class="gate">GATE<br><span>11B</span></span>
             <span class="seat">SEAT<br><span>@item.SeatInitials</span></span>
             <span class="boardingtime">DEPARTURE DATE<br><span>@item.DepartureDate</span></span>
                 

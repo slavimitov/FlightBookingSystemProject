@@ -6,6 +6,6 @@ namespace FlightBookingSystemProject.Services.Airlines
     {
         bool IsAirline(string userId);
         void CreateAirline(string name, string userId);
-        string GetAirlineName(int flightId);
+        string GetAirlineName(int airlineId);
     }
 }

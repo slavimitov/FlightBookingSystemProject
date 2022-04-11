@@ -71,8 +71,8 @@ namespace FlightBookingSystemProject.Controllers
                 {
                     Origin = x.OriginIata,
                     Destination = x.DestinationIata,
-                    DepartureDate = x.DepartureDate.ToString(),
-                    ReturnDate = x.ReturnDate.ToString(),
+                    DepartureDate = x.DepartureDate.ToString("MM/dd/yyyy"),
+                    ReturnDate = x.ReturnDate.ToString("MM/dd/yyyy"),
                     Price = x.Price,
                     DestinationImageUrl = x.DestinationImageUrl,
                     FlightId = x.Id
@@ -90,8 +90,8 @@ namespace FlightBookingSystemProject.Controllers
                 {
                     Origin = x.OriginIata,
                     Destination = x.DestinationIata,
-                    DepartureDate = x.DepartureDate.ToString(),
-                    ReturnDate = x.ReturnDate.ToString(),
+                    DepartureDate = x.DepartureDate.ToString("MM/dd/yyyy"),
+                    ReturnDate = x.ReturnDate.ToString("MM/dd/yyyy"),
                     Price = x.Price,
                     DestinationImageUrl = x.DestinationImageUrl,
                     FlightId = x.Id

@@ -69,7 +69,7 @@ namespace FlightBookingSystemProject.Controllers
 
             var userEmail = this.User.FindFirst(ClaimTypes.Email).Value;
 
-            var query = seats.GetBookedSeats(userId, userEmail);
+            var query = seats.GetBookedSeats(userId);
 
             if (query.Count == 0)
             {
@@ -81,7 +81,7 @@ namespace FlightBookingSystemProject.Controllers
                     AirlineName = airlines.GetAirlineName(x.Flight.AirlineId),
                     Destination = x.Flight.DestinationIata,
                     Origin = x.Flight.OriginIata,
-                    DepartureDate = x.Flight.DepartureDate.ToString(),
+                    DepartureDate = x.Flight.DepartureDate.ToString("MM/dd/yyyy"),
                     Email = userEmail,
                     FlightId = x.FlightId,
                     SeatInitials = x.Seat.Initials

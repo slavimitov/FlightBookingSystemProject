@@ -283,7 +283,7 @@
 .flight {
     position: absolute;
     top: 10px;
-    left: 180px;
+    left: 210px;
     font-family: Arial Narrow, Arial;
     font-weight: bold;
     font-size: 14px;
@@ -295,20 +295,8 @@
         font-size: 17px;
     }
 
-.gate {
-    position: absolute;
-    top: 10px;
-    left: 280px;
-    font-family: Arial Narrow, Arial;
-    font-weight: bold;
-    font-size: 14px;
-    color: #999;
-}
 
-    .gate span {
-        color: #555;
-        font-size: 17px;
-    }
+
 
 
 .seat {

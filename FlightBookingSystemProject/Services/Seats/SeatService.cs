@@ -63,7 +63,7 @@ namespace FlightBookingSystemProject.Services.Seats
             return data.Seats.Where(s => s.FlightId == flightId).ToList();
         }
 
-        public List<Ticket> GetBookedSeats(string userId, string userEmail)
+        public List<Ticket> GetBookedSeats(string userId)
         { 
             return data.Tickets.Where(t => t.UserId == userId).Include(t => t.Flight).Include(t => t.Seat).ToList();
         }
