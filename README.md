@@ -1,5 +1,5 @@
 # FlightBookingSystemProject
-My SoftUni Project
+My SoftUni ASP.NET Core Project
 
 TODO before presenting:
 1.Add admin layout with Edit mthod for flights
