@@ -26,7 +26,7 @@ namespace FlightBookingSystemProject.Controllers
         {
             var userId = this.User.Id();
      
-            if (airlines.IsAirline(userId))
+            if (airlines.IsAirline(userId) == true)
             {
                 return BadRequest();
             }
@@ -36,7 +36,7 @@ namespace FlightBookingSystemProject.Controllers
                 return View(airline);
             }
 
-            airlines.CreateAirline(airline.Name, userId); ;
+            airlines.CreateAirline(airline.Name, userId);
 
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }

@@ -35,7 +35,7 @@ namespace FlightBookingSystemProject.Controllers
 
             var userId = this.User.Id();
 
-            if (!airlines.IsAirline(userId))
+            if (airlines.IsAirline(userId) == false)
             {
                 return BadRequest();
             }

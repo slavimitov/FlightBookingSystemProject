@@ -1,5 +1,6 @@
 ﻿using FlightBookingSystemProject.Data;
 using FlightBookingSystemProject.Models;
+using FlightBookingSystemProject.Services.Flights;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,17 +9,17 @@ namespace FlightBookingSystemProject.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly FlightBookingDbContext data;
+        private readonly IFlightService flights;
 
-        public HomeController(ILogger<HomeController> logger, FlightBookingDbContext data)
+        public HomeController(ILogger<HomeController> logger, IFlightService flights)
         {
-            _logger = logger;
-            this.data = data;
+            this.flights = flights;
+            _logger = logger;     
         }
 
         public IActionResult Index()
         {
-            var query = data.Flights.ToList();
+            var query = this.flights.GetAll();
             
             var countOfItems = query.Count % 2 == 0 ? query.Count : query.Count - 1;          
            

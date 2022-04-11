@@ -25,7 +25,7 @@ namespace FlightBookingSystemProject.Controllers
         public IActionResult Book(int id)
         {
             var userId = this.User.Id();
-            if (airlines.IsAirline(userId))
+            if (airlines.IsAirline(userId) == true)
             {
                 return RedirectToAction(nameof(FlightsController.All), "Flights");
             }
@@ -50,7 +50,7 @@ namespace FlightBookingSystemProject.Controllers
         public IActionResult Book(IFormCollection formCollection, int id)
         {
             var userId = this.User.Id();
-            if (airlines.IsAirline(userId))
+            if (airlines.IsAirline(userId) == true)
             {
                 return RedirectToAction(nameof(FlightsController.All), "Flights");
             }
@@ -62,7 +62,7 @@ namespace FlightBookingSystemProject.Controllers
         public IActionResult MyBookedSeats()
         {
             var userId = this.User.Id();
-            if (airlines.IsAirline(userId))
+            if (airlines.IsAirline(userId) == true)
             {
                 return RedirectToAction(nameof(FlightsController.All), "Flights");
             }
