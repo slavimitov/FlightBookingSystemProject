@@ -65,7 +65,4 @@ app.MapControllerRoute(
 app.MapRazorPages();
 //((IApplicationBuilder)app).ApplicationServices.GetService<AirplaneBookingDbContext>().Database.Migrate();
 
-
-
-
 app.Run();
