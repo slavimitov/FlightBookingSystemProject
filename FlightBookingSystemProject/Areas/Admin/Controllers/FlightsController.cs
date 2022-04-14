@@ -7,9 +7,11 @@ namespace FlightBookingSystemProject.Areas.Admin.Controllers
     public class FlightsController : AdminController
     {
         private readonly IFlightService flights;
-        public FlightsController(IFlightService flights)
+        private readonly FlightBookingDbContext data;
+        public FlightsController(IFlightService flights, FlightBookingDbContext data)
         {
-            this.flights = flights; 
+            this.flights = flights;
+            this.data = data;
         }
 
         public IActionResult Delete(int id)

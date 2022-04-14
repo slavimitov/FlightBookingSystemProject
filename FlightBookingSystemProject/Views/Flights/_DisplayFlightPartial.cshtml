@@ -25,7 +25,9 @@
                     }
                     else
                     {
-                        @Html.ActionLink("Delete", "Delete", new { Area = "Admin", id = Model.FlightId }, new { @class="btn btn-primary" })
+                        <form asp-area="Admin" asp-controller="Flights" asp-action="Delete" method="get">
+                            @Html.ActionLink("Delete", "Delete", new { Area = "Admin", id = Model.FlightId}, new { @class="btn btn-primary" })
+                        </form>
                     }
                 </div>
 

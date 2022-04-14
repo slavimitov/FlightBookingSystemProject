@@ -22,7 +22,6 @@ namespace FlightBookingSystemProject.Data
               .Entity<IdentityUserLogin<string>>()
               .HasNoKey();
 
-
             base.OnModelCreating(builder);
         }
     }
