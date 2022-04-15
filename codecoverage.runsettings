@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+	<DataCollectionRunSettings>
+		<DataCollectors>
+			<DataCollector friendlyName="Code Coverage" uri="datacollector://Microsoft/CodeCoverage/2.0" assemblyQualifiedName="Microsoft.VisualStudio.Coverage.DynamicCoverageDataCollector, Microsoft.VisualStudio.TraceCollector, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+				<Configuration>
+					<CodeCoverage>
+						<!-- configuration elements -->
+						<Functions>
+							<!-- Exclude Migrations folder -->
+							<Exclude>
+								<Function>^FlightBookingSystemProject.Data\.Migrations\..*</Function>
+								<Function>^FlightBookingSystemProject.Areas\.Identity\..*</Function>
+								<Function>^AspNetCoreGeneratedDocument\..*</Function>
+							</Exclude>
+						</Functions>
+						<ModulePaths>
+							<Exclude>
+								<ModulePath>.*moq.dll</ModulePath>
+								<ModulePath>.*TestAdapter.*</ModulePath>
+							</Exclude>
+						</ModulePaths>
+					</CodeCoverage>
+				</Configuration>
+			</DataCollector>
+		</DataCollectors>
+	</DataCollectionRunSettings>
+</RunSettings>

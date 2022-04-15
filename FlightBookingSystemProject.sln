@@ -5,7 +5,12 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightBookingSystemProject", "FlightBookingSystemProject\FlightBookingSystemProject.csproj", "{30BF1148-4BD7-40FB-B8C3-218A329761D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightBookingSystemProject.Test", "FlightBookingSystemProject.Test\FlightBookingSystemProject.Test.csproj", "{105D1873-E04A-43F1-8DA4-55A7CD6D5E95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightBookingSystemProject.Test", "FlightBookingSystemProject.Test\FlightBookingSystemProject.Test.csproj", "{105D1873-E04A-43F1-8DA4-55A7CD6D5E95}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4B42560D-E293-465D-8EC9-6AEF68167B8E}"
+	ProjectSection(SolutionItems) = preProject
+		codecoverage.runsettings = codecoverage.runsettings
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
