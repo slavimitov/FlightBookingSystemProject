@@ -155,29 +155,29 @@ namespace FlightBookingSystemProject.Test.Controllers
             Assert.AreEqual(redirect.ActionName, "All");
         }
 
-        //[Test]
-        //public void MyBookedSeatsShouldReturnView()
-        //{
-                     
-        //    //Arrange
+        [Test]
+        public void MyBookedSeatsShouldReturnView()
+        {
+                   
+            //Arrange
 
-        //    Mock<IAirlineService> airlineServiceMock = SetupIsAirlineFalse();
-        //    var seatService = SeatServiceMock.Instance;
-        //    var seatsController = new SeatsController(seatService.Object, airlineServiceMock.Object);
-        //    ClaimsPrincipal user = MakeClaim();
+            Mock<IAirlineService> airlineServiceMock = SetupIsAirlineFalse();
+            var seatService = SeatServiceMock.Instance;
+            var seatsController = new SeatsController(seatService.Object, airlineServiceMock.Object);
+            ClaimsPrincipal user = MakeClaim();
 
-        //    seatsController.ControllerContext = new ControllerContext();
-        //    seatsController.ControllerContext.HttpContext = new DefaultHttpContext { User = user };
-        //    //Act
-        //    var result = seatsController.MyBookedSeats();
-        //    //Assert
-        //    Assert.NotNull(result);
+            seatsController.ControllerContext = new ControllerContext();
+            seatsController.ControllerContext.HttpContext = new DefaultHttpContext { User = user };
+            //Act
+            var result = seatsController.MyBookedSeats();
+            //Assert
+            Assert.NotNull(result);
 
-        //    Assert.That(result, Is.TypeOf<ViewResult>());
-        //    var viewResult = result as ViewResult;
-        //    var models = viewResult.Model as List<TicketViewModel>;
+            Assert.That(result, Is.TypeOf<ViewResult>());
+            var viewResult = result as ViewResult;
+            var models = viewResult.Model as List<TicketViewModel>;
 
-        //    Assert.That(models[0], Is.TypeOf<TicketViewModel>());
-        //}
+            Assert.That(models[0], Is.TypeOf<TicketViewModel>());
+        }
     }
 }

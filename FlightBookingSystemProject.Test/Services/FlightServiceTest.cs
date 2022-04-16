@@ -65,6 +65,35 @@ namespace FlightBookingSystemProject.Test.Services
         }
 
         [Test]
+        public void EditShouldReturnTrueAndChangeFlight()
+        {
+            FlightBookingDbContext data = fillDatabase();
+            var flightService = new FlightService(data);
+            //Act
+            var result = flightService.Edit(1, "asa", "asd", "3/4/2022", "3/5/2022", 1, "asd");
+            //Assert
+            Assert.NotNull(result);
+            Assert.That(result, Is.TypeOf<bool>());
+            Assert.AreEqual(result, true);
+            Assert.AreEqual(data.Flights.First().OriginIata, "asa");
+            Assert.AreEqual(9, data.Flights.Count());
+        }
+
+        [Test]
+        public void GetFlightDetailsForEditShouldReturnFlight()
+        {
+            FlightBookingDbContext data = fillDatabase();
+            var flightService = new FlightService(data);
+            //Act
+            var result = flightService.GetFlightDetailsForEdit(1);
+            //Assert
+            Assert.NotNull(result);
+            Assert.That(result, Is.TypeOf<Flight>());
+            Assert.AreEqual(result.OriginIata, "ias");
+            Assert.AreEqual(9, data.Flights.Count());
+        }
+
+        [Test]
         public void GetFilteredShouldReturnAll()
         {
             FlightBookingDbContext data = fillDatabase();

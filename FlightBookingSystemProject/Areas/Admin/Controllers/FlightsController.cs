@@ -2,14 +2,12 @@
 using FlightBookingSystemProject.Data;
 using FlightBookingSystemProject.Services.Flights;
 using FlightBookingSystemProject.Models;
-using AutoMapper;
 
 namespace FlightBookingSystemProject.Areas.Admin.Controllers
 {
     public class FlightsController : AdminController
     {
         private readonly IFlightService flights;
-        private readonly IMapper mapper;
         public FlightsController(IFlightService flights)
         {
             this.flights = flights;
@@ -71,7 +69,7 @@ namespace FlightBookingSystemProject.Areas.Admin.Controllers
 
             var edited = this.flights.Edit(id, flight.Origin, flight.Destination, flight.ReturnDate, flight.DepartureDate, flight.Price, flight.DestinationImageUrl);
 
-            if (!edited)
+            if (edited == false)
             {
                 return BadRequest();
             }

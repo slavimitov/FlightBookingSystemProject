@@ -32,9 +32,23 @@ namespace FlightBookingSystemProject.Test.Mock
                         DestinationImageUrl="asd"
                     }).ToList());
 
+                flightServiceMock
+                    .Setup(x => x.GetFlightDetailsForEdit(1))
+                    .Returns(new Flight
+                    {
+                        DestinationIata = "asd",
+                        OriginIata = "asd",
+                        ReturnDate = DateTime.Now,
+                        DepartureDate = DateTime.Now,
+                        Price = 1,
+                        DestinationImageUrl = "asd"
+                    });
+
+                flightServiceMock
+                    .Setup(x => x.Edit(1, "asd", "dsa", "1/2/2022", "1/2/2022", 1, "asd"))
+                    .Returns(true);
+
                 return flightServiceMock;
-
-
             }
         }
     }
