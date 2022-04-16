@@ -1,0 +1,80 @@
+﻿@model TravelogueFormModel
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="~/css/addTravelogue.css" asp-append-version="true" />
+<form asp-action="Add" asp-area="" asp-controller="Travelogues">
+<div class="container travelogue">
+	<div class="row">
+		<div class="col-md-3">
+			<div class="travelogue-info">
+				<h2>Post your experience</h2>
+				<h4>We would love to read your story !</h4>
+			</div>
+		</div>
+		<div class="col-md-9">
+			<div class="travelogue-form">
+				<div class="form-group">
+                 <label style="color:gray" class="control-label col-sm-2" asp-for="Title"></label>
+				  <div class="col-sm-10">          
+                     <input asp-for="Title" class="form-control" placeholder="Title of travelogue">
+				  </div>
+				</div>
+				<div class="form-group">
+				  <label style="color:gray" class="control-label col-sm-2" asp-for="Subtitle"></label>
+				  <div class="col-sm-10">          
+                     <input asp-for="Subtitle" class="form-control" placeholder="Subtitle of travelogue">
+				  </div>
+				</div>
+				<div class="form-group">
+				  <label style="color:gray" class="control-label col-sm-2" asp-for="Topic"></label>
+				  <div class="col-sm-10">          
+                     <input asp-for="Topic" class="form-control" placeholder="Topic of travelogue">
+				  </div>
+				</div>
+				<div class="form-group">
+				  <label style="color:gray" class="control-label col-sm-2" asp-for="DestinationImageUrl"></label>
+				  <div class="col-sm-10">          
+                     <input asp-for="DestinationImageUrl" class="form-control" placeholder="Main photo of travelogue">
+				  </div>
+				</div>
+				<div class="form-group">
+				  <label style="color:gray" class="control-label col-sm-2" asp-for="SecondImageUrl"></label>
+				  <div class="col-sm-10">          
+                     <input asp-for="SecondImageUrl" class="form-control" placeholder="Other photo">
+				  </div>
+				</div>
+                <div class="form-group">
+				  <label style="color:gray" class="control-label col-sm-2" asp-for="Destination"></label>
+				  <div class="col-sm-10">          
+                     <input asp-for="Destination" class="form-control" placeholder="Destination">
+				  </div>
+				</div>
+                <div class="form-group">
+				  <label style="color:gray" class="control-label col-sm-2" asp-for="Email"></label>
+				  <div class="col-sm-10">          
+                     <input asp-for="Email" class="form-control" placeholder="Your email for contact(optional)">
+				  </div>
+				</div>
+				<div class="form-group">
+				  <label style="color:gray" class="control-label col-sm-2" asp-for="Content"></label>
+				  <div class="col-sm-10">
+					<textarea asp-for="Content" class="form-control" rows="8" placeholder="Your story"></textarea>
+				  </div>
+				</div>
+				<div class="form-group">        
+				  <div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-default">Submit</button>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

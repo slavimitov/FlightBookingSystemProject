@@ -1,0 +1,49 @@
+﻿body {
+    background-color: #25274d;
+}
+
+.travelogue {
+    padding: 4%;
+    height: 400px;
+}
+
+.col-md-3 {
+    background: #ff9b00;
+    padding: 4%;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+}
+
+.travelogue-info {
+    margin-top: 10%;
+}
+
+    .travelogue-info img {
+        margin-bottom: 15%;
+    }
+
+    .travelogue-info h2 {
+        margin-bottom: 10%;
+    }
+
+.col-md-9 {
+    background: #fff;
+    padding: 3%;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+.travelogue-form label {
+    font-weight: 600;
+}
+
+.travelogue-form button {
+    background: #25274d;
+    color: #fff;
+    font-weight: 600;
+    width: 25%;
+}
+
+    .travelogue-form button:focus {
+        box-shadow: none;
+    }

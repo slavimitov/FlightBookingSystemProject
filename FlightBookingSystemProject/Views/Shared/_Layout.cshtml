@@ -13,7 +13,10 @@
         <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="/">Flight Booking</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <a class="nav-item nav-link" asp-area="Admin" asp-page="">Open Admin Page</a>               
+                @if (User.IsInRole("Administrator"))
+                {
+                    <a class="nav-item nav-link" asp-area="Admin" asp-page="">Open Admin Page</a>       
+                }             
                 <ul class="navbar-nav" style="width:300px; margin:0 auto">
                     <partial name="_LoginPartial" />
                     <li class="dropdown">
@@ -23,9 +26,12 @@
 
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/">Home</a></li>
-                            <li><a class="dropdown-item" href="/Flights/All">All</a></li>
+                            <li><a class="dropdown-item" href="/Flights/All">All Flights</a></li>
                             <li><a class="dropdown-item" href="/Flights/Add">Add Flight</a></li>
+                            <li><a class="dropdown-item" href="/Flights/Search">Search Flight</a></li>
                             <li><a class="dropdown-item" href="/Seats/MyBookedSeats">My Booked Seats</a></li>
+                            <li><a class="dropdown-item" href="/Travelogues/Add">Add Travelogue</a></li>
+                            <li><a class="dropdown-item" href="/Travelogues/All">All Travelogues</a></li>
                         </ul>
                     </li>
                 </ul>

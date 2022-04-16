@@ -11,6 +11,7 @@ namespace FlightBookingSystemProject.Data
         public DbSet<Airport> Airports { get; set; }
         public DbSet<Airline> Airlines { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<Travelogue> Travelogues { get; set; }
         public FlightBookingDbContext(DbContextOptions<FlightBookingDbContext> options)
             : base(options)
         {
