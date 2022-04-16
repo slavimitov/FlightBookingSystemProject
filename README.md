@@ -3,14 +3,10 @@ My SoftUni ASP.NET Core Project
 
 TODO before presenting:
 
-1.Add admin layout with Edit mthod for flights
+1.Add caching
 
-2.Code coverage 50% - should be 65%(Test views or asp.net identity login, register...)
+2.(if i have time) Add logic for users to post travelogue
 
-3.Add caching
+3.(if i have time) Add geolocation
 
-4.(if i have time) Add logic for users to post travelogue
-
-5.(if i have time) Add geolocation
-
-6.(if i have time) Azure publish
+4.(if i have time) Azure publish
