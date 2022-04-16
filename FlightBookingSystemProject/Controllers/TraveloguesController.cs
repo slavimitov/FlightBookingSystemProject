@@ -4,6 +4,7 @@ using FlightBookingSystemProject.Models;
 using FlightBookingSystemProject.Services.Airlines;
 using FlightBookingSystemProject.Services.Flights;
 using FlightBookingSystemProject.Services.Seats;
+using FlightBookingSystemProject.Services.Travelogues;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,12 +12,12 @@ namespace FlightBookingSystemProject.Controllers
 {
     public class TraveloguesController : Controller
     {
-        private readonly FlightBookingDbContext data;
+        private readonly ITravelogueService travelogues;
         private readonly IAirlineService airlines;
 
-        public TraveloguesController(FlightBookingDbContext data, IAirlineService airlines)
+        public TraveloguesController(ITravelogueService travelogues, IAirlineService airlines)
         {
-            this.data = data;
+            this.travelogues = travelogues;
             this.airlines = airlines;
         }
         [Authorize]
@@ -47,26 +48,24 @@ namespace FlightBookingSystemProject.Controllers
                 return BadRequest();
             }
 
-            this.data.Travelogues.Add(new Travelogue
-            {
-                UserId = userId,
-                Title = travelogue.Title,
-                Subtitle = travelogue.Subtitle,
-                Topic = travelogue.Topic,
-                Destination = travelogue.Destination,
-                DestinationImageUrl = travelogue.DestinationImageUrl,
-                SecondImageUrl = travelogue.SecondImageUrl,
-                Email = travelogue.Email,
-                Content = travelogue.Content,
-            });
-            data.SaveChanges();
+            travelogues.Add(
+                userId,
+                travelogue.Title,
+                travelogue.Subtitle,
+                travelogue.Content,
+                travelogue.DestinationImageUrl,
+                travelogue.SecondImageUrl,
+                travelogue.Topic,
+                travelogue.Destination,
+                travelogue.Email);
 
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
         public IActionResult All()
         {
-            var travelogues = data.Travelogues.Select(t => new AllTraveloguesViewModel
+            var query = this.travelogues.GetAll();
+            var travelogues = query.Select(t => new AllTraveloguesViewModel
             {
                 Title = t.Title,
                 Destination = t.Destination,
@@ -78,7 +77,7 @@ namespace FlightBookingSystemProject.Controllers
 
         public IActionResult Details(int travelogueId)
         {
-            var travelogue = data.Travelogues.Find(travelogueId);
+            var travelogue = travelogues.GetById(travelogueId);
             var model = new TravelogueDetailsViewModel
             {
                 Topic = travelogue.Topic,

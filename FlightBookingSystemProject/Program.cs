@@ -3,6 +3,7 @@ using FlightBookingSystemProject.Infastructure;
 using FlightBookingSystemProject.Services.Airlines;
 using FlightBookingSystemProject.Services.Flights;
 using FlightBookingSystemProject.Services.Seats;
+using FlightBookingSystemProject.Services.Travelogues;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -32,6 +33,7 @@ builder.Services.AddControllersWithViews(options =>
 builder.Services.AddTransient<IFlightService, FlightService>();
 builder.Services.AddTransient<IAirlineService, AirlineService>();
 builder.Services.AddTransient<ISeatService, SeatService>();
+builder.Services.AddTransient<ITravelogueService, TravelogueService>();
 
 var app = builder.Build();
 
@@ -63,6 +65,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
-//((IApplicationBuilder)app).ApplicationServices.GetService<AirplaneBookingDbContext>().Database.Migrate();
 
 app.Run();
