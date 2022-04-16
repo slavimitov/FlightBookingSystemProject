@@ -1,0 +1,14 @@
+﻿
+<link rel="stylesheet" href="~/css/card.css" asp-append-version="true" />
+
+<div id="PlaceHolderHere"></div>
+<div class="container">
+    @model IEnumerable<AllFlightsViewModel>
+   
+    <div class="row">
+        @foreach (var flight in Model)
+        {
+            <partial name="_DisplayFlightPartial" model="flight" />
+        }
+    </div>
+</div> 

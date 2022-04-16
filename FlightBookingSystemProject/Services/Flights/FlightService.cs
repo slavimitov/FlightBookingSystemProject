@@ -35,6 +35,11 @@ namespace FlightBookingSystemProject.Services.Flights
             data.SaveChanges();
         }
 
+        public Flight GetFlightDetailsForEdit(int flightId)
+        {
+            return data.Flights.FirstOrDefault(f => f.Id == flightId);      
+        }
+
         public List<Flight> GetAll()
         {
             return data.Flights.ToList();
@@ -67,6 +72,27 @@ namespace FlightBookingSystemProject.Services.Flights
             }
 
             return query;
+        }
+
+        public bool Edit(int flightId, string origin, string destination, string returnDate, string departureDate, decimal price, string DestinationImageUrl)
+        {
+            var flight = this.data.Flights.Find(flightId);
+
+            if (flight == null)
+            {
+                return false;
+            }
+
+            flight.OriginIata = origin;
+            flight.DestinationIata = destination;
+            flight.ReturnDate = DateTime.Parse(returnDate);
+            flight.DepartureDate = DateTime.Parse(departureDate);
+            flight.Price = price;
+            flight.DestinationImageUrl = DestinationImageUrl; 
+
+            this.data.SaveChanges();
+
+            return true;
         }
     }
 }
