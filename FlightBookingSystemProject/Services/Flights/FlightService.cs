@@ -12,6 +12,10 @@ namespace FlightBookingSystemProject.Services.Flights
         }
         public int Add(string origin, string destination, string returnDate, string departureDate, decimal price, string DestinationImageUrl, string userId)
         {
+            if (!data.Airports.Any(a => a.IataCode == origin.ToUpper()) || !data.Airports.Any(a => a.IataCode == destination.ToUpper()))
+            {
+                throw new Exception("Origin or destination does not exist!");
+            }
             var flight = new Flight
             {
                 OriginIata = origin,

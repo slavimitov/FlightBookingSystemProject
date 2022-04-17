@@ -32,6 +32,18 @@ namespace FlightBookingSystemProject.Test.Services
                 Name = "1",
                 UserId = "1"
             });
+            data.Airports.Add(new Airport
+            {
+                Id = 1,
+                City = "london",
+                IataCode = "ASA"
+            });
+            data.Airports.Add(new Airport
+            {
+                Id = 2,
+                City = "Sofia",
+                IataCode = "ASD"
+            });
 
             data.SaveChanges();
             return data;
