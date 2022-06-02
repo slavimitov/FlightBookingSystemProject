@@ -23,6 +23,8 @@ namespace FlightBookingSystemProject.Test.Services
             var data = DatabaseMock.Instance;
             data.Flights.AddRange(Enumerable.Range(0, 9).Select(f => new Flight
             {
+                OriginName = "Sofia",
+                DestinationName = "Plovdiv",
                 OriginIata = "ias",
                 DestinationIata = "sar",
                 DepartureDate = new DateTime(2022,1,1),

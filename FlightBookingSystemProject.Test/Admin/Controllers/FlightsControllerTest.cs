@@ -18,34 +18,6 @@ namespace FlightBookingSystemProject.Test.Admin.Controllers
 {
     public class FlightsControllerTest
     {
-        private static Mock<IAirlineService> SetupIsAirlineTrue()
-        {
-            var airlineServiceMock = new Mock<IAirlineService>();
-
-            airlineServiceMock
-                .Setup(x => x.IsAirline("1"))
-                .Returns(true);
-            return airlineServiceMock;
-        }
-        private static Mock<IAirlineService> SetupIsAirlineFalse()
-        {
-            var airlineServiceMock = new Mock<IAirlineService>();
-
-            airlineServiceMock
-                .Setup(x => x.IsAirline("1"))
-                .Returns(false);
-            return airlineServiceMock;
-        }
-        private static ClaimsPrincipal MakeClaim()
-        {
-            var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[] {
-                                        new Claim(ClaimTypes.NameIdentifier, "1"),
-                                        new Claim(ClaimTypes.Name, "ad@com")
-                                        // other required and custom claims
-                                   }, "TestAuthentication"));
-            return user;
-        }
-
 
         [Test]
         public void DeleteGetShouldReturnView()

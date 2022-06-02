@@ -169,6 +169,8 @@ namespace FlightBookingSystemProject.Test.Controllers
             var data = DatabaseMock.Instance;
             data.Flights.AddRange(Enumerable.Range(0, 9).Select(f => new Flight
             {
+                OriginName = "Sofia",
+                DestinationName = "Plovdiv",
                 OriginIata = "ias",
                 DestinationIata = "sar",
                 DestinationImageUrl = "asdasdas"
@@ -198,6 +200,8 @@ namespace FlightBookingSystemProject.Test.Controllers
             var data = DatabaseMock.Instance;
             data.Flights.AddRange(Enumerable.Range(0, 9).Select(f => new Flight
             {
+                OriginName = "Sofia",
+                DestinationName = "Plovdiv",
                 OriginIata = "ias",
                 DestinationIata = "sar",
                 DestinationImageUrl = "asdasdas"

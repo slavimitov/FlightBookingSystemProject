@@ -16,8 +16,8 @@ namespace FlightBookingSystemProject.Services.Flights
             {
                 throw new Exception("Origin or destination does not exist!");
             }
-            var airportDestination = data.Airports.FirstOrDefault(x => x.IataCode == destination);
-            var airportOrigin = data.Airports.FirstOrDefault(x => x.IataCode == origin);
+            var airportDestination = data.Airports.FirstOrDefault(x => x.IataCode == destination.ToUpper());
+            var airportOrigin = data.Airports.FirstOrDefault(x => x.IataCode == origin.ToUpper());
             var flight = new Flight
             {
                 DestinationName = airportDestination.City,
