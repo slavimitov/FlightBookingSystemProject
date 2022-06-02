@@ -80,3 +80,10 @@ The admins have own layout, they can see all flights, delete flights :x: and edi
 ### Edit flight page
 
 ![edit](https://user-images.githubusercontent.com/62722807/171748945-88e2138d-e6bb-473a-9d4c-d3a4bb5a3d4e.png)
+
+# Code Coverage
+
+![test_coverage1](https://user-images.githubusercontent.com/62722807/171756949-57c00a88-5e2e-441f-9f16-03095199a452.png)
+
+![code_coverage2](https://user-images.githubusercontent.com/62722807/171756989-c9ed2278-6834-48f8-9e5d-56d0ee7bbd22.png)
+
