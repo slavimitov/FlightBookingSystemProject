@@ -69,6 +69,8 @@ namespace FlightBookingSystemProject.Controllers
             var flights = query
                 .Select(x => new AllFlightsViewModel
                 {
+                    DestinationName = x.DestinationName,
+                    OriginName = x.OriginName,
                     Origin = x.OriginIata,
                     Destination = x.DestinationIata,
                     DepartureDate = x.DepartureDate.ToString("MM/dd/yyyy"),
@@ -88,6 +90,8 @@ namespace FlightBookingSystemProject.Controllers
             queryModel.Flights = query
                 .Select(x => new AllFlightsViewModel
                 {
+                    DestinationName = x.DestinationName,
+                    OriginName = x.OriginName,
                     Origin = x.OriginIata,
                     Destination = x.DestinationIata,
                     DepartureDate = x.DepartureDate.ToString("MM/dd/yyyy"),

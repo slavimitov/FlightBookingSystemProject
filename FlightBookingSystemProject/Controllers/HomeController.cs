@@ -32,6 +32,8 @@ namespace FlightBookingSystemProject.Controllers
                  latestFlights = query
                     .Select(x => new AllFlightsViewModel
                     {
+                        DestinationName = x.DestinationName,
+                        OriginName = x.OriginName,
                         Origin = x.OriginIata,
                         Destination = x.DestinationIata,
                         DepartureDate = x.DepartureDate.ToString("MM/dd/yyyy"),

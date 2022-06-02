@@ -13,6 +13,12 @@ namespace FlightBookingSystemProject.Data
         public int Id { get; set; }
 
         [Required]
+        public string DestinationName { get; set; }
+
+        [Required]
+        public string OriginName { get; set; }
+
+        [Required]
         [StringLength(3)]
         public string OriginIata { get; set; }
 
