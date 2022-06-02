@@ -18,7 +18,7 @@ The airlines can see all flights, serach them, make flights, see all travelogues
 ### Admin :person_in_tuxedo:
 The admins have own layout, they can see all flights, delete flights :x: and edit them :memo:.
 
-# View from the app
+# Views from the app
 
 ## Login/Register
 
